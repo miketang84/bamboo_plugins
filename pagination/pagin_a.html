@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/media/css/bootstrap.css" type="text/css" media="screen" />
+
+<div class="paginator_wrapper">
+	{{htmlcontent}}
+
+		<div class="pagination">
+		  <ul>
+			<li{% if thepage == 1 then %} class="disabled" {% end %}><a href="{{pageurl}}?thepage={{prevpage}}&npp={{npp}}&totalpages={{totalpages}}">«</a></li>
+			{% pageShown = 10 %}
+			{-
+			{% for i=1, totalpages do %}
+			<li{% if i == thepage then %} class="active" {% end %}>
+			  <a href="{{pageurl}}?thepage={{i}}&npp={{npp}}&totalpages={{totalpages}}">{{i}}</a>
+			</li>
+			{% end %}
+			-}
+			{% offset = 5 %}
+			{% if thepage>offset then %}
+			<li>
+			  <a href="{{pageurl}}?thepage={{1}}&npp={{npp}}&totalpages={{totalpages}}">1...</a>
+			</li>
+			{% end %}
+			{% for i=thepage-offset+1, thepage-offset+pageShown do %}
+			{% if i >= 1 and i <= totalpages then %}
+			<li{% if i == thepage then %} class="active" {% end %}>
+			  <a href="{{pageurl}}?thepage={{i}}&npp={{npp}}&totalpages={{totalpages}}">{{i}}</a>
+			</li>
+			{% end %}
+			{% end %}
+			{% if thepage<totalpages-offset then %}
+			<li>
+			  <a href="{{pageurl}}?thepage={{totalpages}}&npp={{npp}}&totalpages={{totalpages}}">...{{totalpages}}</a>
+			</li>
+			{% end %}
+			<li{% if thepage == totalpages then %} class="disabled" {% end %}><a href="{{pageurl}}?thepage={{nextpage}}&npp={{npp}}&totalpages={{totalpages}}">»</a></li>
+			<!-- <li><a>{{thepage}}/{{totalpages}}</a></li> -->
+			<!-- <li><a><input type="text" /></a></li> -->
+		  </ul>
+		</div>
+
+</div>
+
+
