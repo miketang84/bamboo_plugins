@@ -2,56 +2,56 @@
 
 <style>
 
-.paginator {}
-.paginator select {width: 60px; display: inline;background: #fff; border: 1px solid #aaa;}
-.paginator form {display: inline;} 
-.paginator input {width: 40px; border: 1px solid #aaa;}
+.pagination {}
+.pagination select {width: 60px; display: inline;background: #fff; border: 1px solid #aaa;}
+.pagination form {display: inline;} 
+.pagination input {width: 40px; border: 1px solid #aaa;}
 </style>
 
 <script>
 $(document).ready(function() {
-	var paginator_wrapper = $('.paginator_wrapper');
-	var pageurl = paginator_wrapper.attr('pageurl');
-	var thepage = paginator_wrapper.attr('thepage');
-	var npp = paginator_wrapper.attr('npp');
-	var totalpages = paginator_wrapper.attr('totalpages');
+	var pagination_wrapper = $('.pagination_wrapper');
+	var pageurl = pagination_wrapper.attr('pageurl');
+	var thepage = pagination_wrapper.attr('thepage');
+	var npp = pagination_wrapper.attr('npp');
+	var totalpages = pagination_wrapper.attr('totalpages');
 	
-	var paginator_htmlcontent = $('.paginator_htmlcontent', paginator_wrapper);
-	console.log(paginator_wrapper, paginator_htmlcontent)
+	var pagination_htmlcontent = $('.pagination_htmlcontent', pagination_wrapper);
+	//console.log(pagination_wrapper, pagination_htmlcontent)
 	
 	
 	var helper = function (query) {
 		$.get(pageurl, query, function (data) {
 			if (data.success) {
-				paginator_htmlcontent.html(data.htmlcontent);
+				pagination_htmlcontent.html(data.htmlcontent);
 				pselector.val(data.thepage);
-				paginator_wrapper.attr('thepage', data.thepage);
+				pagination_wrapper.attr('thepage', data.thepage);
 			}
 		});
 	}
 	
-	var pselector = $('select', paginator_wrapper);
+	var pselector = $('select', pagination_wrapper);
 	pselector.change(function () {
 		var queryjson = {thepage: $(this).val(), npp: npp,	totalpages: totalpages};
 		helper(queryjson);
 		return false;
 	});
 	
-	$('.paginator a', paginator_wrapper).click(function () {
+	$('.pagination a', pagination_wrapper).click(function () {
 		var queryjson = {};
-		if ($(this).hasClass('paginator_head')) {
+		if ($(this).hasClass('pagination_head')) {
 			queryjson = {thepage: 1, npp: npp,	totalpages: totalpages};
 		}
-		else if ($(this).hasClass('paginator_tail')) {
+		else if ($(this).hasClass('pagination_tail')) {
 			queryjson = {thepage: totalpages, npp: npp,	totalpages: totalpages};
 		}
-		else if ($(this).hasClass('paginator_prev')) {
-			var thepage = parseInt(paginator_wrapper.attr('thepage')) - 1;
+		else if ($(this).hasClass('pagination_prev')) {
+			var thepage = parseInt(pagination_wrapper.attr('thepage')) - 1;
 			if (thepage < 1) thepage = 1;
 			queryjson = {thepage: thepage, npp: npp, totalpages: totalpages};
 		}
-		else if ($(this).hasClass('paginator_next')) {
-			var thepage = parseInt(paginator_wrapper.attr('thepage')) + 1;
+		else if ($(this).hasClass('pagination_next')) {
+			var thepage = parseInt(pagination_wrapper.attr('thepage')) + 1;
 			if (thepage > totalpages) thepage = totalpages;
 			queryjson = {thepage: thepage, npp: npp, totalpages: totalpages};
 		}
@@ -60,8 +60,8 @@ $(document).ready(function() {
 		return false;
 	});
 
-	var paginator_form = $('form', paginator_wrapper);
-	paginator_form.submit(function () {
+	var pagination_form = $('form', pagination_wrapper);
+	pagination_form.submit(function () {
 		var query = $(this).serialize();
 		helper(query);
 		return false;
@@ -70,25 +70,25 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="paginator_wrapper" pageurl="{{pageurl}}" thepage="{{thepage}}" npp="{{npp}}" totalpages="{{totalpages}}">
-	<div class="paginator_htmlcontent"> {{htmlcontent}} </div>
+<div class="pagination_wrapper" pageurl="{{pageurl}}" thepage="{{thepage}}" npp="{{npp}}" totalpages="{{totalpages}}">
+	<div class="pagination_htmlcontent"> {{htmlcontent}} </div>
 
-	<div class="paginator" >
-		<a class="paginator_head paginator_item" href="#">首页</a>
-		<a class="paginator_prev paginator_item" href="#">上一页</a>
-		<select class="paginator_select">
+	<div class="pagination" >
+		<a class="pagination_head pagination_item" href="#">首页</a>
+		<a class="pagination_prev pagination_item" href="#">上一页</a>
+		<select class="pagination_select">
 			{% for i=1, totalpages do %}
 			<option value="{{i}}" {% if i == thepage then %} selected="true" {% end %}>{{i}}/{{totalpages}}</option>
 			{% end %}
 		</select>
-		<form method="post" class="paginator_form">
+		<form method="post" class="pagination_form">
 			<input type="text" name="thepage" maxlength="4" size='4' />
 			<input type="hidden" name="npp" value="{{npp}}" />
 			<input type="hidden" name="totalpages" value="{{totalpages}}" />
 		</form>
 
-		<a class="paginator_next paginator_item" href="#">下一页</a>
-		<a class="paginator_tail paginator_item" href="#">末页</a>
+		<a class="pagination_next pagination_item" href="#">下一页</a>
+		<a class="pagination_tail pagination_item" href="#">末页</a>
 	</div>
 
 </div>

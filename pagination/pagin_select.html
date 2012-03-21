@@ -2,16 +2,16 @@
 
 <style>
 
-.paginator {}
-.paginator select {width: 60px; display: inline;background: #fff; border: 1px solid #aaa;}
-.paginator form {display: inline;} 
-.paginator input {width: 40px; border: 1px solid #aaa;}
+.pagination {}
+.pagination select {width: 60px; display: inline;background: #fff; border: 1px solid #aaa;}
+.pagination form {display: inline;} 
+.pagination input {width: 40px; border: 1px solid #aaa;}
 </style>
 
 <script>
 $(document).ready(function() {
-	var paginator_wrapper = $('.paginator_wrapper');
-	var pselector = $('select', paginator_wrapper);
+	var pagination_wrapper = $('.pagination_wrapper');
+	var pselector = $('select', pagination_wrapper);
 	pselector.change(function () {
 		var thepage = $(this).val();
 		//console.log(thepage);
@@ -24,25 +24,25 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="paginator_wrapper">
+<div class="pagination_wrapper">
 	{{htmlcontent}}
 
-	<div class="paginator" >
-		<a class="paginator_head paginator_item" href="{{pageurl}}?thepage=1&npp={{npp}}&totalpages={{totalpages}}">首页</a>
-		<a class="paginator_prev paginator_item" href="{{pageurl}}?thepage={{prevpage}}&npp={{npp}}&totalpages={{totalpages}}">上一页</a>
-		<select class="paginator_select" pageurl="{{pageurl}}?npp={{npp}}&totalpages={{totalpages}}">
+	<div class="pagination" >
+		<a class="pagination_head pagination_item" href="{{pageurl}}?thepage=1&npp={{npp}}&totalpages={{totalpages}}">首页</a>
+		<a class="pagination_prev pagination_item" href="{{pageurl}}?thepage={{prevpage}}&npp={{npp}}&totalpages={{totalpages}}">上一页</a>
+		<select class="pagination_select" pageurl="{{pageurl}}?npp={{npp}}&totalpages={{totalpages}}">
 			{% for i=1, totalpages do %}
 			<option value="{{i}}" {% if i == thepage then %} selected="true" {% end %}>{{i}}/{{totalpages}}</option>
 			{% end %}
 		</select>
-		<form method="post" class="paginator_form" action="{{pageurl}}?">
+		<form method="post" class="pagination_form" action="{{pageurl}}?">
 			<input type="text" name="thepage" maxlength="4" size='4' />
 			<input type="hidden" name="npp" value="{{npp}}" />
 			<input type="hidden" name="totalpages" value="{{totalpages}}" />
 		</form>
 
-		<a class="paginator_next paginator_item" href="{{pageurl}}?thepage={{nextpage}}&npp={{npp}}&totalpages={{totalpages}}">下一页</a>
-		<a class="paginator_tail paginator_item" href="{{pageurl}}?thepage={{totalpages}}&npp={{npp}}&totalpages={{totalpages}}">末页</a>
+		<a class="pagination_next pagination_item" href="{{pageurl}}?thepage={{nextpage}}&npp={{npp}}&totalpages={{totalpages}}">下一页</a>
+		<a class="pagination_tail pagination_item" href="{{pageurl}}?thepage={{totalpages}}&npp={{npp}}&totalpages={{totalpages}}">末页</a>
 	</div>
 
 </div>
