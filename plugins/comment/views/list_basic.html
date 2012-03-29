@@ -1,0 +1,16 @@
+
+<style>
+.comment_ul { margin: 4px; }
+.comment_item { list-style: none; padding: 3px; border-bottom: 1px dotted #333; display: block;}
+</style>
+
+<ul class="comment_ul">
+{% for i, comment in ipairs(comments) do %}
+<li class="comment_item">
+	{% local comment_user = comment:getForeign('user') %}
+	<span> {{comment_user.username or 'somebody' }}  </span> 在 <span> {{ os.date('%Y-%m-%d %H:%M:%S', comment.timestamp) }}</span> 说：
+	<p>{{comment.content}}<p>
+	
+</li>
+{% end %}
+</ul>

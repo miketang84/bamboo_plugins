@@ -1,0 +1,54 @@
+{: 'indexbase.html' :}
+
+{[ ======== "page" ========
+
+<style>
+#body_left {
+	height: 800px;
+	background: #e6e6e6;
+	border: 1px #373737 solid;
+}
+
+#body_blank_left {
+}
+
+#body_blank_right {
+}
+
+#body_right {
+	height: 800px;
+	border: 1px #aaa solid;
+	font-size: 18px;
+}
+
+#user_profile_window {
+	padding: 10px;
+}
+
+</style>
+
+<div id="body_blank_left" class="column span-1 first">
+	　
+</div>
+<!--  左边部分  -->
+<div id="body_left" class="column span-5">
+<div id="user_profile_window">
+<img width="120" border="1" src="/{% local t = user:getForeign('userlogo_middle'); if t then %}{{t.path}}{% else %}media/images/default_head/middle.png{% end %}"/>
+<div style="width: 120px;text-align: center;"><a href="/userlogo/">更换头像</a></div>
+</div>
+
+</div>
+
+<!--  右边部分  -->
+<div id="body_right" class="column span-17">
+	这里面是关于此用户的一些信息。<br/><br/>
+	<strong>姓名：</strong> <span>{{req.user.username}}</span>
+</div>
+
+<!--  右边部分  -->
+<div id="body_blank_right" class="column span-1 last">
+　
+</div>
+
+
+]}

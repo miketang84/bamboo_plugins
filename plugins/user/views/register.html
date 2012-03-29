@@ -1,0 +1,30 @@
+
+<h2>创建一个新帐户</h2>
+<form id="register_form" method="post" action="/user/postRegister/">
+<table class="login_layout_table">
+<tbody>
+    <tr>
+	    <td class="left_caption"><label for="username">用户名：</label></td>
+    	<td><input type="text" name="username" id="username"></td>
+    </tr>
+    <tr>
+		<td class="left_caption"><label for="password">密码：</label></td>
+		<td><input type="password" id="password" name="password"></td>
+	</tr>
+	<tr>
+		<td class="left_caption"><label for="password_confirm">确认密码：</label></td>
+		<td><input type="password" id="password_confirm" name="password_confirm"></td>
+	</tr>
+    <tr>
+		<td class="left_caption"><label for="email">电子邮件：</label></td>
+    	<td><input type="text" name="email" id="email"></td>
+	</tr>
+<!--    <tr>
+		<td class="left_caption"><label for="validationcode">验证码：</label></td>
+    	<td><input type="text" name="validationcode" id="validationcode"> <img id="validationpic" width="80" src="/validationcode/?random=XXXX"/></td>
+	</tr>
+	-->
+</tbody>
+</table>
+<input type="submit" value="提交" id="register_submit"/><input class="register_cancel" type="button" value="取消" />
+</form>

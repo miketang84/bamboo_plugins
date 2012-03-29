@@ -1,0 +1,8 @@
+
+<form method="post" action="/comment/postcomment/">
+<textarea name="comment_content" class="comment_content"></textarea>
+<input type="hidden" name="target_url" value="{{args.target_url}}"/>
+<input type="hidden" name="target_model" value="{{args.target_model}}"/>
+<input type="hidden" name="target_id" value="{{args.target_id}}"/>
+<input type="submit" value="提交" />
+</form>

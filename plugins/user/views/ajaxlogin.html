@@ -1,0 +1,42 @@
+
+<script type="text/javascript" src="/media/js/md5.js"></script>
+<script>
+	$(function(){
+			$("#login").click(function(){
+					// console.log("login");
+					$.post("/ipuser/login/post/", 
+						   {username: $("#username").val(), password: encode($("#password").val()) },
+						   function(data){
+							   // console.log(data);
+							   if(!data.success)
+								   alert(data.err_desc);
+							   else
+								   window.location.href="/";
+						   });
+					//  return false;
+				});
+
+		});
+</script>
+
+
+<h2>登录</h2>
+<form id="login_form" action="/user/postlogin/" method="post">
+<table class="login_layout_table">
+<tbody>
+    <tr>
+    	<td class="left_caption"><label for="username">用户名称：</label></td>
+		<td><input type="text" name="username" value="" id="username"></td>
+	</tr>
+	<tr>
+		<td class="left_caption"><label for="password">密码：</label></td>
+		<td><input type="password" name="password" value="" id="password"></td>
+	</tr>
+</tbody>
+</table>
+
+<input type="button" value="登录" id="user_login" />&nbsp;<a id="user_forgotpsw" href="/user/forgotpsw/">忘了密码</a>？ <br/><br/>
+还没有帐户？，<a id="user_register" href="/user/register/">注册</a>一个。
+
+</form>
+

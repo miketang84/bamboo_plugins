@@ -1,0 +1,56 @@
+
+
+<script>
+$(document).ready(function () {	
+	
+//	for (var i=1; i<={{nlevel}}; i++) {
+	var process = function (i) {
+	
+		$('div.namelevel' + i + ' input[type={{tmpl}}]').each(function (j) {
+			var current_level = i;
+
+			console.log($(this), i, j);
+			var self = $(this);
+			self.click(function () {
+				self.parent().nextAll().html('');
+				console.log($(this))
+				//console.log(self.parent().parent())
+				console.log(self.parent().next())
+				//$('div.namelevel:eq(' + (i+1) + ')')
+				$.get('/levelink/select/?_tag={{_tag}}', {chosen: j+1, current_level: current_level}, function (data) {
+					if (data.success) {
+						console.log(data)
+						self.parent().next().html(data.htmls);
+						process(i+1);
+					}
+				}); 
+			
+			});
+		});
+		/*
+		 input[@name=namelevel' + i +'][@checked]').val()
+			var self = $(this);
+		self.change(function () {
+			$(".cats :radio").eq(i).attr('checked', true);
+		});
+	});*/
+	
+	}
+
+	process(1);
+
+});
+</script>
+
+
+<div class="levelink_container">
+<div class="namelevel1">
+{( format('../plugins/levelink/views/%s.html', tmpl)  )}
+</div>
+
+{% for i=2, nlevel do %}
+<div class="namelevel{{i}}">
+</div>
+{% end %}
+
+</div>

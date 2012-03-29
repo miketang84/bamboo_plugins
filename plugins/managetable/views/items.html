@@ -1,0 +1,34 @@
+<script>
+	$(document).ready(function(){
+		$('table tr:even').css('background', '#DDFFDD');
+	});
+</script>
+<table class="managetable" width="100%" style="table-layout:fixed;" >
+	<thead>
+		<tr>
+			<th class="managetable_col0">　</th>
+			{% for i, head in ipairs(thead) do %}
+			<th class="managetable_col{{i}}">{{head}}</th>
+			{% end %}
+			<th class="managetable_coledit">　</th>
+			<th class="managetable_coldel">　</th>
+		</tr>
+	</thead>
+	<tbody class="managetable_body">
+		{% for i, item in ipairs(datasource) do %}
+		<tr>
+			<td class="managetable_col0"><input type="checkbox" name="managetable_checkbox" value="{{item.id}}" /></td>
+			{% for j, field in ipairs(tbody) do %}
+			{% if type(field) == 'string' then %}
+			<td class="managetable_col{{j}}">{{ item[field] }}</td>
+			{% elseif type(field) == 'function' then %}
+			<td class="managetable_col{{j}}">{{ field(item) }}</td>					
+			{% end %}
+			{% end %}
+			<td class="managetable_coledit"><a class="managetable_action_edit" href="{{edit_url}}?id={{item.id}}">编辑</a></td>
+			<td class="managetable_coldel"><a class="managetable_action_del" href="{{del_url}}?id={{item.id}}">删除</a></td>
+		</tr>
+		{% end %}
+	</tbody>
+</table>
+

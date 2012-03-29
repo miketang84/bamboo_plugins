@@ -1,0 +1,49 @@
+<script type="text/javascript" src="/media/js/md5.js"></script>
+
+<script>
+	 $(function(){
+			 $("#submit").click(function(){
+					 $.post("/ipuser/create",
+	{username: $("#username").val(), password: encode($("#password").val()), password_confirm: encode($("#password_confirm").val()), email: $("#email").val() },
+							function(data){
+								if(data.success){
+									window.location.href="/";
+								}
+								else{
+									alert(data.err_desc);
+								}
+							});
+				 });
+		 });
+</script>
+
+
+<h2>创建一个新帐户</h2>
+<form id="register_form" method="post" action="/ipuser/create/">
+<table class="login_layout_table">
+<tbody>
+    <tr>
+	    <td class="left_caption"><label for="username">用户名：</label></td>
+    	<td><input type="text" name="username" id="username"></td>
+    </tr>
+    <tr>
+		<td class="left_caption"><label for="password">密码：</label></td>
+		<td><input type="password" id="password" name="password"></td>
+	</tr>
+	<tr>
+		<td class="left_caption"><label for="password_confirm">确认密码：</label></td>
+		<td><input type="password" id="password_confirm" name="password_confirm"></td>
+	</tr>
+    <tr>
+		<td class="left_caption"><label for="email">电子邮件：</label></td>
+    	<td><input type="text" name="email" id="email"></td>
+	</tr>
+<!--    <tr>
+		<td class="left_caption"><label for="validationcode">验证码：</label></td>
+    	<td><input type="text" name="validationcode" id="validationcode"> <img id="validationpic" width="80" src="/validationcode/?random=XXXX"/></td>
+	</tr>
+	-->
+</tbody>
+</table>
+<input type="button" value="提交" id="submit"/>　　<input class="cancel_btn" type="button" value="取消" />
+</form>
